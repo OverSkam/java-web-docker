@@ -13,12 +13,13 @@
     <p>${pdmg}       ${edmg}</p>
     <p>${plvl}       ${elvl}</p>
     <p>${pgold}       ${egold}</p>
+    <h1>${roll}</h1>
 </div>
 <form method="post" >
-    <button type="submit" value="attack">Boop</button>
+    <button type="submit" name="action" value="attack">Attack</button>
 </form>
 <form method="post" >
-    <button type="submit" value="heal">Beep</button>
+    <button type="submit" name="action" value="heal">Heal</button>
 </form>
 </body>
 </html>

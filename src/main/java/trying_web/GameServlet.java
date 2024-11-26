@@ -17,6 +17,8 @@ public class GameServlet extends HttpServlet {
         this.te = te;
     }
 
+    HashMap<String, Object> data = logic.getPLayerAndEnemy();
+
 
     public void doGet(HttpServletRequest req, HttpServletResponse res){
         te.render("game.ftl", logic.getPLayerAndEnemy(), res);
@@ -24,7 +26,17 @@ public class GameServlet extends HttpServlet {
 
     @SneakyThrows
     public void doPost(HttpServletRequest req, HttpServletResponse res){
-        GameLogic.player.setName("boop");
+        String action = req.getParameter("action");
+        int[] rollAndSuccess = new int[2];
+        switch (action) {
+            case "attack":
+                rollAndSuccess = logic.attackEnemy();
+                break;
+            case "heal":
+                rollAndSuccess =logic.healPlayer();
+                break;
+        }
+        data.put("roll", String.valueOf(rollAndSuccess[0]));
         res.sendRedirect("/start");
     }
 }
