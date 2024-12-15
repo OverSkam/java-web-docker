@@ -12,7 +12,8 @@
 
     <form method="post">
         <label for="username">Username</label>
-        <input type="text" name="name" placeholder="Enter your username" required>
+        <input type="text" name="login" placeholder="Enter your username" required>
+        <input type="text" name="password" placeholder="Enter your password" required>
 
         <button type="submit">Login</button>
     </form>
