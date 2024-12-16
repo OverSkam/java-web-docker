@@ -32,4 +32,16 @@ public class MatchesServlet extends HttpServlet {
             te.render("matches.ftl", mainOps.matches(maybeId), res);
         }
     }
+
+    @SneakyThrows
+    public void doPost(HttpServletRequest req, HttpServletResponse res){
+        String action = req.getParameter("action");
+        int maybeId = mainOps.getUserId(req);
+        if (maybeId == -1)
+            res.sendRedirect("/login");
+        else {
+            String url = String.valueOf(mainOps.getChatId(maybeId, Integer.parseInt(action)));
+            res.sendRedirect(url);
+        }
+    }
 }

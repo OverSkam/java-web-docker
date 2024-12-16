@@ -10,7 +10,11 @@
 <div class="menu-container">
     <h1>Matches</h1>
     <#list users as user>
-       <h1>${user}</h1>
+        <h1>${user.name}</h1>
+        <h1>${user.surname}</h1>
+        <form method="post">
+            <button type="submit" name="action" value=${user.id}>Start chat</button>
+        </form>
     </#list>
 </div>
 
