@@ -19,7 +19,7 @@ public class CookieOps {
     }
 
     @SneakyThrows
-    public void setCookie(HttpServletResponse res, int id){
+    public void setCookieFromDB(HttpServletResponse res, int id){
         PreparedStatement st = conn.prepareStatement("SELECT cookie FROM users WHERE id=?");
         st.setInt(1, id);
         ResultSet rs = st.executeQuery();
@@ -37,6 +37,11 @@ public class CookieOps {
         st.close();
 
         Cookie c = new Cookie("UID", cid);
+        res.addCookie(c);
+    }
+
+    public void deleteCookie(HttpServletResponse res){
+        Cookie c = new Cookie("UID", "");
         res.addCookie(c);
     }
 

@@ -32,17 +32,25 @@ public class LoginServlet extends HttpServlet {
 
     @SneakyThrows
     public void doPost(HttpServletRequest req, HttpServletResponse res){
-        String login = req.getParameter("login");
-        login = login.toLowerCase();
-        String password = req.getParameter("password");
+        Optional<String> action = Optional.ofNullable(req.getParameter("login"));
+        if (action.isPresent()){
+            String login = req.getParameter("login");
+            login = login.toLowerCase();
+            String password = req.getParameter("password");
 
-        int userId = isInDB(login, password);
-        if (userId != 0){
-            cookieOps.setCookie(res, userId);
-            res.sendRedirect("/main");
+            int userId = isInDB(login, password);
+            if (userId != -1){
+                cookieOps.setCookieFromDB(res, userId);
+                res.sendRedirect("/main");
+            }
+            else
+                res.sendRedirect("/login");
         }
-        else
-            res.sendRedirect("/login");
+
+        Optional<String> action1 = Optional.ofNullable(req.getParameter("reg"));
+        if (action1.isPresent())
+            res.sendRedirect("/reg");
+
     }
 
     @SneakyThrows
@@ -56,7 +64,7 @@ public class LoginServlet extends HttpServlet {
         if (rs.next())
             return rs.getInt("id");
         else
-            return 0;
+            return -1;
     }
 
 }

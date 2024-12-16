@@ -37,6 +37,16 @@ public class DBOps {
             System.out.println("Not registered");
     }
 
+    @SneakyThrows
+    public int countUsers(){
+        PreparedStatement st = connection.prepareStatement("""
+                SELECT COUNT(id) AS count FROM users
+                """);
+        ResultSet rs = st.executeQuery();
+        rs.next();
+        return rs.getInt("count");
+    }
+
 
     @SneakyThrows
     public boolean doesUserExist(String login) {

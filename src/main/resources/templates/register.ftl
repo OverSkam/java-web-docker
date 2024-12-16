@@ -8,17 +8,16 @@
 </head>
 <body>
 <div class="login-container">
-    <h2>Login</h2>
+    <h2>Register</h2>
 
     <form method="post">
-        <label for="username">Username</label>
         <input type="text" name="login" placeholder="Enter your login" required>
         <input type="text" name="password" placeholder="Enter your password" required>
         <input type="text" name="name" placeholder="Enter your name" required>
         <input type="text" name="surname" placeholder="Enter your surname" required>
 
 
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
     </form>
 </div>
 </body>
