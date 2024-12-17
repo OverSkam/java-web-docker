@@ -105,16 +105,6 @@
 <body>
 <div class="chat-container">
     <div class="messages">
-        <#-- Iterate through the messages stored in the model -->
-        <#list messages as ms>
-            <div class="message ${ms.type}">
-                <div class="sender-name">
-                    ${ms.owner}
-                </div>
-                ${ms.message}
-
-            </div>
-        </#list>
     </div>
     <div class="message-input-container">
         <form method="post" style="display: flex; width: 100%;">

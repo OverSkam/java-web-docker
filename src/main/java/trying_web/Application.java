@@ -21,8 +21,8 @@ public class Application {
         handler.addServlet(new ServletHolder(new RegisterServlet(te, conn)), "/reg");
         handler.addServlet(new ServletHolder(new MainServlet(te, conn)), "/main");
         handler.addServlet(new ServletHolder(new MatchesServlet(te, conn)), "/matches");
-        handler.addServlet(new ServletHolder(new ChatServlet(te, conn)), "/chat");
-        //handler.addServlet(new ServletHolder(new EGameServlet(te)), "/start");
+        handler.addServlet(new ServletHolder(new ChatServlet(te, conn)), "/chat/*");
+        handler.addServlet(new ServletHolder(new UserToChatServlet(conn)), "/user/*");
         handler.addServlet(new ServletHolder(new StaticContentServlet("static0")), "/static/*");
 
         server.setHandler(handler);

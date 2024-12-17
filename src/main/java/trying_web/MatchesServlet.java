@@ -40,7 +40,7 @@ public class MatchesServlet extends HttpServlet {
         if (maybeId == -1)
             res.sendRedirect("/login");
         else {
-            String url = String.valueOf(mainOps.getChatId(maybeId, Integer.parseInt(action)));
+            String url = "chat/" + String.valueOf(mainOps.getChatId(maybeId, Integer.parseInt(action)));
             res.sendRedirect(url);
         }
     }
