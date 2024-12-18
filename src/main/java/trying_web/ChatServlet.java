@@ -54,8 +54,21 @@ public class ChatServlet extends HttpServlet {
             if (maybeId == -1)
                 res.sendRedirect("/login");
             else {
-                mainOps.saveNewMessage(chatId, maybeId, req.getParameter("message"));
-                res.sendRedirect(thisUri);
+                String action = req.getParameter("action");
+                switch (action) {
+                    case "send":
+                        mainOps.saveNewMessage(chatId, maybeId, req.getParameter("message"));
+                        res.sendRedirect(thisUri);
+                        break;
+                    case "back":
+                       res.sendRedirect("/matches");
+                       break;
+                    case "logout":
+                        cookieOps.deleteCookie(res);
+                        res.sendRedirect("/login");
+                        break;
+                }
+
             }
         } else
             res.sendRedirect("/login");

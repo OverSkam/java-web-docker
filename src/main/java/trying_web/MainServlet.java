@@ -21,7 +21,7 @@ public class MainServlet extends HttpServlet {
     MainOps mainOps;
     int randomId;
 
-    public MainServlet(TemplateEngine te, Connection connection){
+    public MainServlet(TemplateEngine te, Connection connection) {
         this.te = te;
         this.connection = connection;
         this.dbOps = new DBOps(connection);
@@ -30,18 +30,18 @@ public class MainServlet extends HttpServlet {
     }
 
     @SneakyThrows
-    public void doGet(HttpServletRequest req, HttpServletResponse res){
+    public void doGet(HttpServletRequest req, HttpServletResponse res) {
         this.randomId = rd.nextInt(dbOps.countUsers()) + 1;
         te.render("main.ftl", mainOps.randomUser(randomId), res);
     }
 
     @SneakyThrows
-    public void doPost(HttpServletRequest req, HttpServletResponse res){
+    public void doPost(HttpServletRequest req, HttpServletResponse res) {
         Optional<String> action = Optional.ofNullable(req.getParameter("action"));
         Optional<String> navigation = Optional.ofNullable(req.getParameter("navigation"));
 
         if (action.isPresent())
-            switch (action.get()){
+            switch (action.get()) {
                 case "skip":
                     res.sendRedirect("/main");
                     break;
@@ -56,15 +56,17 @@ public class MainServlet extends HttpServlet {
                     break;
             }
         if (navigation.isPresent())
-            switch (navigation.get()){
+            switch (navigation.get()) {
                 case "logout":
-                cookieOps.deleteCookie(res);
-                res.sendRedirect("/login");
-                break;
+                    cookieOps.deleteCookie(res);
+                    res.sendRedirect("/login");
+                    break;
+                case "matches":
+                    res.sendRedirect("/matches");
+                    break;
             }
 
     }
-
 
 
 }
