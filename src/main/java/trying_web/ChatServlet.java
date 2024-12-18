@@ -2,6 +2,7 @@ package trying_web;
 
 import lombok.SneakyThrows;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,8 +65,7 @@ public class ChatServlet extends HttpServlet {
                        res.sendRedirect("/matches");
                        break;
                     case "logout":
-                        cookieOps.deleteCookie(res);
-                        res.sendRedirect("/login");
+                        res.sendRedirect("/gol");
                         break;
                 }
 

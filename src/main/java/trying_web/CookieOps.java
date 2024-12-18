@@ -42,6 +42,7 @@ public class CookieOps {
 
     public void deleteCookie(HttpServletResponse res){
         Cookie c = new Cookie("UID", "");
+        c.setMaxAge(0);
         res.addCookie(c);
     }
 

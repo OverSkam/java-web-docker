@@ -1,6 +1,5 @@
 package trying_web;
 
-import com.sun.tools.javac.Main;
 import lombok.SneakyThrows;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -23,6 +22,7 @@ public class Application {
         handler.addServlet(new ServletHolder(new MatchesServlet(te, conn)), "/matches");
         handler.addServlet(new ServletHolder(new ChatServlet(te, conn)), "/chat/*");
         handler.addServlet(new ServletHolder(new UserToChatServlet(conn)), "/user/*");
+        handler.addServlet(new ServletHolder(new Logout()), "/gol");
         handler.addServlet(new ServletHolder(new StaticContentServlet("static0")), "/static/*");
 
         server.setHandler(handler);
