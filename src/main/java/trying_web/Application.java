@@ -12,7 +12,9 @@ public class Application {
     public static void main(String[] args) {
 
         Connection conn = DBConnection.make("jdbc:postgresql://ccaml3dimis7eh.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/dc8u7tinlsasdi");
-        Server server = new Server(8080);
+        int port = Integer.parseInt(System.getenv("PORT"));
+        Server server = new Server(port);
+
         TemplateEngine te = new TemplateEngine("templates");
 
         ServletContextHandler handler = new ServletContextHandler();
