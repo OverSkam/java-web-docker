@@ -22,7 +22,7 @@ public class DBOps {
         if (!doesUserExist(login)) {
             PreparedStatement st = connection.prepareStatement(
                     """
-                   INSERT INTO users (login, pass, name, surname, cookie) values (?, ?, ?, ?, ?)
+                   INSERT INTO users (login, pass, name, surname, cookie, image) values (?, ?, ?, ?, ?, ?)
                """
             );
             st.setString(1, login);
@@ -30,6 +30,7 @@ public class DBOps {
             st.setString(3, name);
             st.setString(4, surname);
             st.setString(5, UUID.randomUUID().toString());
+            st.setString(6, "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
             st.execute();
             System.out.println("Registered");
         }

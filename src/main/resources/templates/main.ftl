@@ -180,7 +180,7 @@
                 <img src="${photoUrl}" alt="User Photo">
             <#else>
                 <!-- Placeholder photo if no URL is provided -->
-                <img src="https://via.placeholder.com/120" alt="User Photo">
+                <img src="${image}" alt="User Photo">
             </#if>
         </div>
         <div class="user-name">${name} ${surname}</div>

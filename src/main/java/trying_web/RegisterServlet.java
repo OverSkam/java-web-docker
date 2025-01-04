@@ -9,23 +9,21 @@ import java.sql.Connection;
 
 public class RegisterServlet extends HttpServlet {
     TemplateEngine te;
-    private final Connection connection;
     CookieOps cookieOps;
     DBOps dbOps;
 
-    public RegisterServlet(TemplateEngine te, Connection connection){
+    public RegisterServlet(TemplateEngine te, Connection connection) {
         this.te = te;
-        this.connection = connection;
         this.dbOps = new DBOps(connection);
         this.cookieOps = new CookieOps(connection);
     }
 
-    public void doGet(HttpServletRequest req, HttpServletResponse res){
+    public void doGet(HttpServletRequest req, HttpServletResponse res) {
         te.render("register.ftl", res);
     }
 
     @SneakyThrows
-    public void doPost(HttpServletRequest req, HttpServletResponse res){
+    public void doPost(HttpServletRequest req, HttpServletResponse res) {
         String login = req.getParameter("login");
         login = login.toLowerCase();
         String password = req.getParameter("password");

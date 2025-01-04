@@ -75,10 +75,19 @@
             font-weight: bold;
             color: #fff;
         }
-        .last-message {
-            font-size: 14px;
-            color: #aaa;
-            margin-top: 5px;
+        .profile-photo {
+            width: 70px;
+            height: 70px;
+            background-color: #444;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 15px;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image fits nicely inside the circle */
         }
     </style>
 </head>
@@ -89,7 +98,11 @@
         <#-- Iterate over the list of users -->
         <#list users as user>
             <li class="user-item" onclick="window.location.href='/user/${user.id}'">
-                <div class="user-avatar"></div>
+                <div class="profile-photo">
+                    <#if user.image?has_content>
+                        <img src="${user.image}" alt="User Photo">
+                    </#if>
+                </div>
                 <div class="user-info">
                     <div class="user-name">${user.name} ${user.surname}</div>
                 </div>

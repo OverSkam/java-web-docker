@@ -20,15 +20,17 @@ public class MainOps {
     @SneakyThrows
     public HashMap<String, Object> randomUser(int id) {
         PreparedStatement st = connection.prepareStatement("""
-                SELECT name, surname, age, about FROM users WHERE id=?
+                SELECT name, surname, age, about, image FROM users WHERE id=?
                 """);
         st.setInt(1, id);
+        System.out.println("user id: "+id);
         ResultSet rs = st.executeQuery();
         HashMap<String, Object> user = new HashMap<>();
         while (rs.next()) {
             user.put("name", rs.getString("name"));
             user.put("surname", rs.getString("surname"));
             user.put("age", String.valueOf(rs.getInt("age")));
+            user.put("image", rs.getString("image"));
             if (rs.getString("about") != null)
                 user.put("about", rs.getString("about"));
             else
@@ -94,19 +96,31 @@ public class MainOps {
         List<SimpleUser> s = new ArrayList<>();
 
         while (rs.next()) {
+            int whomId = rs.getInt("whom");
             PreparedStatement st1 = connection.prepareStatement("""
-                    SELECT name, surname, id FROM users WHERE id=?
+                    SELECT EXISTS (SELECT 1 FROM likes WHERE who=? AND whom=?)
                     """);
-            st1.setInt(1, rs.getInt("whom"));
+            st1.setInt(1, whomId);
+            st1.setInt(2, who);
             ResultSet rs1 = st1.executeQuery();
             rs1.next();
 
-            SimpleUser su = new SimpleUser(
-                    rs1.getString("name"),
-                    rs1.getString("surname"),
-                    rs1.getInt("id")
-            );
-            s.add(su);
+            if (rs1.getBoolean(1)) {
+                PreparedStatement st2 = connection.prepareStatement("""
+                        SELECT name, surname, id, image FROM users WHERE id=?
+                        """);
+                st2.setInt(1, whomId);
+                ResultSet rs2 = st2.executeQuery();
+                rs2.next();
+
+                SimpleUser su = new SimpleUser(
+                        rs2.getString("name"),
+                        rs2.getString("surname"),
+                        rs2.getInt("id"),
+                        rs2.getString("image")
+                );
+                s.add(su);
+            }
         }
         result.put("users", s);
 
