@@ -24,6 +24,7 @@ public class Application {
         handler.addServlet(new ServletHolder(new UserToChatServlet(conn)), "/user/*");
         handler.addServlet(new ServletHolder(new Logout()), "/gol");
         handler.addServlet(new ServletHolder(new StaticContentServlet("static0")), "/static/*");
+        handler.addServlet(new ServletHolder(new LoginServlet(te, conn)), "/*");
 
         server.setHandler(handler);
 
